@@ -19,7 +19,7 @@
     <!-- BILL -->
     <TextView
         android:id="@+id/lblBill"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:text="@string/lblBill"
         android:textAlignment="textEnd"
@@ -30,10 +30,11 @@
     <EditText
         android:id="@+id/txtBill"
         style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:textAlignment="textEnd"
+        android:text="@string/defaultMoney"
         app:layout_constraintEnd_toStartOf="@+id/lblEuroBill"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblBill"
@@ -44,7 +45,7 @@
     <TextView
         android:id="@+id/lblEuroBill"
         style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:text="@string/lblEuro"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -55,7 +56,7 @@
     <!-- TIP % -->
     <TextView
         android:id="@+id/lblTipPer"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/main_inter_margin"
         android:text="@string/lblTipPer"
@@ -66,8 +67,10 @@
     <EditText
         android:id="@+id/txtTipPer"
         style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
+        android:maxLength="6"
+        android:text="@string/defaultTipPer"
         android:inputType="numberDecimal"
         android:textAlignment="textEnd"
         app:layout_constraintEnd_toStartOf="@+id/lblTip"
@@ -90,7 +93,7 @@
     <!-- TIP -->
     <TextView
         android:id="@+id/lblTip"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/main_inter_margin"
         android:text="@string/lblTip"
@@ -102,8 +105,9 @@
     <EditText
         android:id="@+id/txtTip"
         style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
+        android:text="@string/defaultMoney"
 
         android:clickable="false"
         android:cursorVisible="false"
@@ -118,7 +122,7 @@
     <TextView
         android:id="@+id/lblEuroTip"
         style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:text="@string/lblEuro"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -129,7 +133,7 @@
     <!-- TOTAL -->
     <TextView
         android:id="@+id/lblTotalBill"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/main_inter_margin"
         android:text="@string/lblTotalBill"
@@ -141,13 +145,14 @@
     <EditText
         android:id="@+id/txtTotalBill"
         style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:clickable="false"
         android:cursorVisible="false"
         android:focusable="false"
         android:inputType="none"
         android:textAlignment="textEnd"
+        android:text="@string/defaultMoney"
         app:layout_constraintEnd_toEndOf="@+id/txtBill"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblTotalBill"
@@ -155,7 +160,7 @@
     <TextView
         android:id="@+id/lblEuroTotal"
         style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:text="@string/lblEuro"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -182,7 +187,7 @@
     <!-- Dinners -->
     <TextView
         android:id="@+id/lblDinners"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/main_inter_margin"
         android:text="@string/lblDiners"
@@ -194,9 +199,10 @@
     <EditText
         android:id="@+id/txtDinners"
         style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
+        android:inputType="number"
+        android:text="@string/defaultDinners"
         android:textAlignment="textEnd"
         app:layout_constraintRight_toRightOf="@+id/lblDinners"
         app:layout_constraintLeft_toLeftOf="@+id/lblDinners"
@@ -205,7 +211,7 @@
     <!-- Per Dinner -->
     <TextView
         android:id="@+id/lblPerDinner"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/main_inter_margin"
         android:text="@string/lblPerDiner"
@@ -217,12 +223,13 @@
     <EditText
         android:id="@+id/txtPerDinner"
         style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:clickable="false"
         android:cursorVisible="false"
         android:focusable="false"
         android:inputType="none"
+        android:text="@string/defaultMoney"
         android:textAlignment="textEnd"
         app:layout_constraintLeft_toLeftOf="@id/lblPerDinner"
         app:layout_constraintRight_toRightOf="@id/lblPerDinner"
@@ -231,7 +238,7 @@
         android:id="@+id/lblEuroDinner"
         style="@style/Base.TextAppearance.AppCompat.Headline"
 
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:text="@string/lblEuro"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -244,7 +251,7 @@
     <!-- Rounded -->
     <TextView
         android:id="@+id/lblRounded"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/main_inter_margin"
         android:text="@string/lblRounded"
@@ -256,8 +263,9 @@
     <EditText
         android:id="@+id/txtRounded"
         style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
+        android:text="@string/defaultMoney"
 
         android:clickable="false"
         android:cursorVisible="false"
@@ -272,7 +280,7 @@
         android:id="@+id/lblEuroRounded"
         style="@style/Base.TextAppearance.AppCompat.Headline"
 
-        android:layout_width="0dp"
+        android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
         android:text="@string/lblEuro"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -284,7 +292,7 @@
 
     <!-- Button -->
     <Button
-        android:id="@+id/btnResetDinners"
+        android:id="@+id/btnResetAll"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
