@@ -4,7 +4,7 @@ package es.iessaladillo.pedrojoya.tipcalculator.model
 // TipCalculator class. Its constructor receives bill, percentage and diners
 
 class TipCalculator {
-
+/*
     fun calculateTip(): Float {
         // TODO
     }
@@ -20,5 +20,5 @@ class TipCalculator {
     fun calculatePerDinerRounded(): Float {
         // TODO
     }
-
+*/
 }

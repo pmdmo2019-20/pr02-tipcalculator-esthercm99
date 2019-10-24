@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Tip Calculator</string>
+    <string name="lblBill">Bill</string>
+    <string name="lblTipPer">Tip %</string>
+    <string name="lblTip">Tip</string>
+    <string name="lblTotalBill">Total</string>
+    <string name="resetTxt">RESET</string>
+    <string name="lblEuro">€</string>
+    <string name="lblPer">%</string>
 </resources>
