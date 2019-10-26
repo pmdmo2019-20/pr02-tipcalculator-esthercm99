@@ -17,14 +17,14 @@ class TipCalculatorTest {
     @DisplayName("Should throw IllegalArgumentException when percentage is negative")
     @Test
     fun `should throw IllegalArgumentException when percentage is negative`() {
-        // TODO
+        assertThrows(IllegalArgumentException::class.java) { TipCalculator(1f, -10f, 1) }
     }
 
     @DisplayName("Should throw IllegalArgumentException when diners is not positive")
     @ParameterizedTest
     @ValueSource(ints = [-1, 0])
     fun `should throw IllegalArgumentException when diners is not positive`(diners: Int) {
-        // TODO
+        assertThrows(IllegalArgumentException::class.java) { TipCalculator(1f, 10f, -1) }
     }
 
     @DisplayName("Should calculate total properly")
