@@ -1,7 +1,6 @@
 package es.iessaladillo.pedrojoya.tipcalculator.model
 
 import kotlin.math.ceil
-import kotlin.math.round
 
 // TipCalculator class. Its constructor receives bill, percentage and diners
 class TipCalculator(
@@ -11,7 +10,7 @@ class TipCalculator(
 ) {
 
     init {
-        if(bill < 0.0f || percentage < 0.0 || diners < 0) {
+        if(bill < 0.0f || percentage < 0.0 || diners < 1) {
             throw IllegalArgumentException()
         }
     }
