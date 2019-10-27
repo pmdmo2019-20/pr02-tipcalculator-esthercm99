@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        tipCalculator = TipCalculator(R.string.defaultMoney.toFloat(), R.string.defaultTipPer.toFloat(), R.string.defaultDinners.toInt())
+
         setupViews()
         resetBtnBillTip()
         resetBtnAll()
@@ -37,20 +39,24 @@ class MainActivity : AppCompatActivity() {
         changeViewTip(txtTipPer)
         changeViewTip(txtDiner)
     }
+
     private fun changeViewTip(editText: EditText) {
-        editText.setSelectAllOnFocus(true)
         editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 changeCommaByPoint(editText)
-                checkValuesText()
+                if(editText.text.toString().isNotEmpty()) {
+                    checkIfPointStart()
+                    checkValuesText()
+                } else {
+                    return
+                }
             }
             override fun afterTextChanged(s: Editable) {
-                if(!editText.text.toString().equals("")) {
-                    changeValues()
+                if(editText.text.toString().isNotEmpty()) {
+                    changeValuesResult()
                 }
-                if(editText.isFocused) {}
             }
         })
     }
@@ -66,31 +72,50 @@ class MainActivity : AppCompatActivity() {
         val diner = txtDiners.text.toString()
 
         if (bill.isNotEmpty() && percentage.isNotEmpty() && diner.isNotEmpty()) {
-            if (!bill.startsWith(".") && !percentage.startsWith(".") && !diner.startsWith(".")) {
-                // Se comprueba si los valores son negativos o se exceden:
-                if (diner.toInt() < 1) {
-                    txtDiners.setText(getString(R.string.defaultDinners))
-                }
-
-                if (bill.toFloat() < 0.00f) {
-                    txtBill.setText(getString(R.string.defaultMoney))
-                }
-
-                if (percentage.toFloat() < 0.00f) {
-                    txtTipPer.setText(getString(R.string.defaultTipPer))
-                } else if (percentage.toFloat() > 100.00f) {
-                    txtTipPer.setText(getString(R.string.defaultMaxTipPer))
-                }
-
-                tipCalculator = TipCalculator(bill.toFloat(), percentage.toFloat(), diner.toInt())
+            // Se comprueba si los valores son negativos o se exceden:
+            if (diner.toInt() < 1) {
+                txtDiners.setText(getString(R.string.defaultDinners))
             }
+
+            if (bill.toFloat() < 0.00f) {
+                txtBill.setText(getString(R.string.defaultMoney))
+            }
+
+            if (percentage.toFloat() < 0.00f) {
+                txtTipPer.setText(getString(R.string.defaultTipPer))
+            } else if (percentage.toFloat() > 100.00f) {
+                txtTipPer.setText(getString(R.string.defaultMaxTipPer))
+            }
+
+            tipCalculator = TipCalculator(txtBill.text.toString().toFloat(), txtTipPer.text.toString().toFloat(), txtDiners.text.toString().toInt())
         }
     }
-    private fun changeValues() {
-        txtTip.setText(String.format("%.2f",tipCalculator?.calculateTip()))
-        txtTotalBill.setText(String.format("%.2f",tipCalculator?.calculateTotal()))
+    private fun changeValuesResult() {
+        txtTip.setText(String.format("%.2f", tipCalculator?.calculateTip()))
+        txtTotalBill.setText(String.format("%.2f", tipCalculator?.calculateTotal()))
         txtPerDinner.setText(String.format("%.2f",tipCalculator?.calculatePerDiner()))
-        txtRounded.setText(String.format("%.2f",tipCalculator?.calculatePerDinerRounded()))
+        txtRounded.setText(String.format("%.2f", tipCalculator?.calculatePerDinerRounded()))
+
+        changeCommaByPoint(txtTip)
+        changeCommaByPoint(txtTotalBill)
+        changeCommaByPoint(txtPerDinner)
+        changeCommaByPoint(txtRounded)
+    }
+
+    private fun checkIfPointStart() {
+        val bill = txtBill.text.toString()
+        val percentage = txtTipPer.text.toString()
+        val diner = txtDiners.text.toString()
+
+        if (bill.startsWith(".")) {
+            txtBill.setText(R.string.defaultMoney)
+        }
+        if (percentage.startsWith(".")) {
+            txtTipPer.setText(R.string.defaultTipPer)
+        }
+        if (diner.startsWith(".")) {
+            txtDiners.setText(R.string.defaultDinners)
+        }
     }
 
     // BOTONES DE RESET

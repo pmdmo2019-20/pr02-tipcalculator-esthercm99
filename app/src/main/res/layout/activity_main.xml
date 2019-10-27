@@ -35,6 +35,8 @@
         android:inputType="numberDecimal"
         android:textAlignment="textEnd"
         android:text="@string/defaultMoney"
+        android:maxLength="15"
+        android:selectAllOnFocus="true"
         app:layout_constraintEnd_toStartOf="@+id/lblEuroBill"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblBill"
@@ -73,6 +75,7 @@
         android:text="@string/defaultTipPer"
         android:inputType="numberDecimal"
         android:textAlignment="textEnd"
+        android:selectAllOnFocus="true"
         app:layout_constraintEnd_toStartOf="@+id/lblTip"
         app:layout_constraintRight_toRightOf="@id/lblPer"
 
@@ -204,6 +207,8 @@
         android:inputType="number"
         android:text="@string/defaultDinners"
         android:textAlignment="textEnd"
+        android:maxLength="5"
+        android:selectAllOnFocus="true"
         app:layout_constraintRight_toRightOf="@+id/lblDinners"
         app:layout_constraintLeft_toLeftOf="@+id/lblDinners"
         app:layout_constraintTop_toBottomOf="@id/lblDinners"/>

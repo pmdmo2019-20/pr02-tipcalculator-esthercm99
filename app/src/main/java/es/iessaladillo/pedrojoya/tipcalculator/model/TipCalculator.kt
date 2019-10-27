@@ -4,9 +4,9 @@ import kotlin.math.round
 
 // TipCalculator class. Its constructor receives bill, percentage and diners
 class TipCalculator(
-    private var bill: Float,
-    private var percentage: Float,
-    private var diners: Int
+    private var bill: Float = 0.0f,
+    private var percentage: Float = 10.0f,
+    private var diners: Int = 1
 ) {
 
     init {
@@ -16,7 +16,7 @@ class TipCalculator(
     }
 
     fun calculateTip(): Float {
-        return bill * (percentage?.div(100))!!
+        return bill * (percentage.div(100))
     }
 
     fun calculateTotal(): Float {
@@ -24,7 +24,7 @@ class TipCalculator(
     }
 
     fun calculatePerDiner(): Float {
-        return calculateTotal().div(diners!!)
+        return calculateTotal().div(diners)
     }
 
     fun calculatePerDinerRounded(): Float {
