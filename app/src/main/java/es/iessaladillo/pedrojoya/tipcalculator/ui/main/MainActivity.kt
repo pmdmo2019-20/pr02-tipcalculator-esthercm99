@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Se inicializa con estos valores por defecto:
         tipCalculator = TipCalculator(R.string.defaultMoney.toFloat(), R.string.defaultTipPer.toFloat(), R.string.defaultDinners)
 
         setupViews()
@@ -25,13 +26,13 @@ class MainActivity : AppCompatActivity() {
         btnResetDiners()
     }
     private fun setupViews() {
-        changeViewTip(txtBill, getString(R.string.defaultMoney))
-        changeViewTip(txtPercentage, getString(R.string.defaultTipPer))
-        changeViewTip(txtDiners, getString(R.string.defaultDinners))
+        changeView(txtBill, getString(R.string.defaultMoney))
+        changeView(txtPercentage, getString(R.string.defaultTipPer))
+        changeView(txtDiners, getString(R.string.defaultDinners))
     }
 
-    // CHANGES
-    private fun changeViewTip(editText: EditText, default: String) {
+    // CHANGE VIEW
+    private fun changeView(editText: EditText, default: String) {
         editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
@@ -51,13 +52,18 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+    // CHANGE COMMA BY POINT
     private fun changeCommaByPoint(editText: EditText) {
+        // Si el número contiene una coma en vez de un punto, se cambia por un punto:
         if (editText.text.toString().contains(",")) {
             editText.setText(editText.text.toString().replace(",", "."))
         }
     }
 
-    // CHECKS
+    // CHECKS:
+
+    // Si en el editText la cadena empieza por un punto, se cambia por su valor inicial:
     private fun checkIfPointStart() {
         val bill = txtBill.text.toString()
         val percentage = txtPercentage.text.toString()
@@ -73,11 +79,14 @@ class MainActivity : AppCompatActivity() {
             txtDiners.setText(R.string.defaultDinners)
         }
     }
+
+    // Se comprueba varias cosas a la hora de introducir los valores:
     private fun checkValuesText() {
         val bill = txtBill.text.toString()
         val percentage = txtPercentage.text.toString()
         val diner = txtDiners.text.toString()
 
+        // Si los campos no están vacíos:
         if (bill.isNotEmpty() && percentage.isNotEmpty() && diner.isNotEmpty()) {
             // Se comprueba si los valores son negativos o se exceden:
             if (diner.toInt() < 1) {
@@ -94,24 +103,27 @@ class MainActivity : AppCompatActivity() {
                 txtPercentage.setText(getString(R.string.defaultMaxTipPer))
             }
 
+            // Se pasa por parametros los valores para que este lo calcule:
             tipCalculator = TipCalculator(txtBill.text.toString().toFloat(), txtPercentage.text.toString().toFloat(), txtDiners.text.toString().toInt())
         }
     }
 
-    // CHANGE VALUES
+    // CHANGE VALUES OF RESULT:
     private fun changeValuesResult() {
+        // Se calcula todos los campos:
         txtTip.setText(String.format(getString(R.string.numberFormat), tipCalculator?.calculateTip()))
         txtTotal.setText(String.format(getString(R.string.numberFormat), tipCalculator?.calculateTotal()))
         txtPerDiner.setText(String.format(getString(R.string.numberFormat),tipCalculator?.calculatePerDiner()))
         txtPerDinerRounded.setText(String.format(getString(R.string.numberFormat), tipCalculator?.calculatePerDinerRounded()))
 
+        // Se cambia la coma por punto por si estuviera en otra región en que usen la coma:
         changeCommaByPoint(txtTip)
         changeCommaByPoint(txtTotal)
         changeCommaByPoint(txtPerDiner)
         changeCommaByPoint(txtPerDinerRounded)
     }
 
-    // BOTONES DE RESET
+    // BUTTONS DE RESET:
     private fun btnResetTip() {
         val btnReset = ActivityCompat.requireViewById<Button>(this, R.id.btnResetTip)
         btnReset.setOnClickListener {resetBillTip()}
@@ -125,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         val defDinner = getString(R.string.defaultDinners)
         val defMoney = getString(R.string.defaultMoney)
 
-        txtDiners.requestFocus()
+        txtDiners.requestFocus()            // Se enfoca al campo de Diners
 
         txtDiners.setText(defDinner)
         txtPerDiner.setText(defMoney)
@@ -135,7 +147,7 @@ class MainActivity : AppCompatActivity() {
         val defMoney = getString(R.string.defaultMoney)
         val defTip = getString(R.string.defaultTipPer)
 
-        txtBill.requestFocus()
+        txtBill.requestFocus()              // Se enfoca al campo de Bill
 
         txtBill.setText(defMoney)
         txtPercentage.setText(defTip)
