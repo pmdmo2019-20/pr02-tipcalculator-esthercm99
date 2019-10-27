@@ -64,10 +64,10 @@
         android:text="@string/lblTipPer"
         android:textAlignment="textEnd"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        app:layout_constraintRight_toRightOf="@id/txtTipPer"
+        app:layout_constraintRight_toRightOf="@id/txtPercentage"
         app:layout_constraintTop_toBottomOf="@+id/txtBill"/>
     <EditText
-        android:id="@+id/txtTipPer"
+        android:id="@+id/txtPercentage"
         style="@style/Base.TextAppearance.AppCompat.Headline"
         android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
@@ -89,8 +89,8 @@
         android:text="@string/lblPer"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        app:layout_constraintBottom_toBottomOf="@+id/txtTipPer"
-        app:layout_constraintLeft_toRightOf="@id/txtTipPer"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPercentage"
+        app:layout_constraintLeft_toRightOf="@id/txtPercentage"
         app:layout_constraintTop_toBottomOf="@id/lblTipPer"/>
 
     <!-- TIP -->
@@ -142,11 +142,11 @@
         android:text="@string/lblTotalBill"
         android:textAlignment="textEnd"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        app:layout_constraintEnd_toEndOf="@+id/txtTotalBill"
-        app:layout_constraintStart_toStartOf="@+id/txtTotalBill"
-        app:layout_constraintTop_toBottomOf="@id/txtTipPer" />
+        app:layout_constraintEnd_toEndOf="@+id/txtTotal"
+        app:layout_constraintStart_toStartOf="@+id/txtTotal"
+        app:layout_constraintTop_toBottomOf="@id/txtPercentage" />
     <EditText
-        android:id="@+id/txtTotalBill"
+        android:id="@+id/txtTotal"
         style="@style/Base.TextAppearance.AppCompat.Headline"
         android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
@@ -167,14 +167,14 @@
         android:layout_height="wrap_content"
         android:text="@string/lblEuro"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        app:layout_constraintBottom_toBottomOf="@+id/txtTotalBill"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTotal"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lblTotalBill" />
 
     <!-- Button -->
     <Button
-        android:id="@+id/btnResetBill"
+        android:id="@+id/btnResetTip"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -182,8 +182,8 @@
         android:layout_marginTop="@dimen/main_inter_margin"
         android:text="@string/resetTxt"
         android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="@+id/txtTotalBill"
-        app:layout_constraintTop_toBottomOf="@+id/txtTotalBill" />
+        app:layout_constraintEnd_toEndOf="@+id/txtTotal"
+        app:layout_constraintTop_toBottomOf="@+id/txtTotal" />
 
 
 <!-- DINNER -->
@@ -197,7 +197,7 @@
         android:textAlignment="textEnd"
         android:textAppearance="?android:attr/textAppearanceSmall"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnResetBill"
+        app:layout_constraintTop_toBottomOf="@id/btnResetTip"
         app:layout_constraintWidth_percent="0.2" />
     <EditText
         android:id="@+id/txtDiners"
@@ -223,10 +223,10 @@
         android:textAlignment="textEnd"
         app:layout_constraintWidth_percent="0.75"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        app:layout_constraintRight_toRightOf="@id/btnResetBill"
-        app:layout_constraintTop_toBottomOf="@id/btnResetBill"/>
+        app:layout_constraintRight_toRightOf="@id/btnResetTip"
+        app:layout_constraintTop_toBottomOf="@id/btnResetTip"/>
     <EditText
-        android:id="@+id/txtPerDinner"
+        android:id="@+id/txtPerDiner"
         style="@style/Base.TextAppearance.AppCompat.Headline"
         android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
@@ -249,9 +249,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/txtPerDinner"
-        app:layout_constraintBottom_toBottomOf="@id/txtPerDinner"
-        app:layout_constraintTop_toTopOf="@id/txtPerDinner" />
+        app:layout_constraintLeft_toRightOf="@id/txtPerDiner"
+        app:layout_constraintBottom_toBottomOf="@id/txtPerDiner"
+        app:layout_constraintTop_toTopOf="@id/txtPerDiner" />
 
     <!-- Rounded -->
     <TextView
@@ -263,10 +263,10 @@
         android:textAlignment="textEnd"
         android:textAppearance="?android:attr/textAppearanceSmall"
         app:layout_constraintLeft_toLeftOf="@id/txtDiners"
-        app:layout_constraintRight_toRightOf="@id/txtPerDinner"
-        app:layout_constraintTop_toBottomOf="@id/txtPerDinner"/>
+        app:layout_constraintRight_toRightOf="@id/txtPerDiner"
+        app:layout_constraintTop_toBottomOf="@id/txtPerDiner"/>
     <EditText
-        android:id="@+id/txtRounded"
+        android:id="@+id/txtPerDinerRounded"
         style="@style/Base.TextAppearance.AppCompat.Headline"
         android:layout_width="@dimen/ceroAncho"
         android:layout_height="wrap_content"
@@ -291,13 +291,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/txtRounded"
-        app:layout_constraintBottom_toBottomOf="@id/txtRounded"
-        app:layout_constraintTop_toTopOf="@id/txtRounded" />
+        app:layout_constraintLeft_toRightOf="@id/txtPerDinerRounded"
+        app:layout_constraintBottom_toBottomOf="@id/txtPerDinerRounded"
+        app:layout_constraintTop_toTopOf="@id/txtPerDinerRounded" />
 
     <!-- Button -->
     <Button
-        android:id="@+id/btnResetAll"
+        android:id="@+id/btnResetDiners"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -305,7 +305,7 @@
         android:layout_marginTop="@dimen/main_inter_margin"
         android:text="@string/resetTxt"
         android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="@+id/txtRounded"
-        app:layout_constraintTop_toBottomOf="@+id/txtRounded" />
+        app:layout_constraintEnd_toEndOf="@+id/txtPerDinerRounded"
+        app:layout_constraintTop_toBottomOf="@+id/txtPerDinerRounded" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

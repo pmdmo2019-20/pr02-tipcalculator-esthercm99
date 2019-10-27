@@ -10,8 +10,6 @@ import androidx.core.app.ActivityCompat
 import es.iessaladillo.pedrojoya.tipcalculator.R
 import es.iessaladillo.pedrojoya.tipcalculator.model.TipCalculator
 import kotlinx.android.synthetic.main.activity_main.*
-import es.iessaladillo.pedrojoya.tipcalculator.model.DecimalDigitsInputFilter
-import android.text.InputFilter
 
 class MainActivity : AppCompatActivity() {
     private var tipCalculator: TipCalculator? = null
@@ -20,27 +18,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tipCalculator = TipCalculator(R.string.defaultMoney.toFloat(), R.string.defaultTipPer.toFloat(), R.string.defaultDinners.toInt())
+        tipCalculator = TipCalculator(R.string.defaultMoney.toFloat(), R.string.defaultTipPer.toFloat(), R.string.defaultDinners)
 
         setupViews()
-        resetBtnBillTip()
-        resetBtnAll()
+        btnResetTip()
+        btnResetDiners()
     }
-
     private fun setupViews() {
-        val txtBill = findViewById<EditText>(R.id.txtBill)
-        val txtTipPer = findViewById<EditText>(R.id.txtTipPer)
-        val txtDiner = findViewById<EditText>(R.id.txtDiners)
-
-        txtBill.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(30, 2))
-        txtTipPer.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(3, 2))
-
-        changeViewTip(txtBill)
-        changeViewTip(txtTipPer)
-        changeViewTip(txtDiner)
+        changeViewTip(txtBill, getString(R.string.defaultMoney))
+        changeViewTip(txtPercentage, getString(R.string.defaultTipPer))
+        changeViewTip(txtDiners, getString(R.string.defaultDinners))
     }
 
-    private fun changeViewTip(editText: EditText) {
+    // CHANGES
+    private fun changeViewTip(editText: EditText, default: String) {
         editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
@@ -50,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                     checkIfPointStart()
                     checkValuesText()
                 } else {
-                    return
+                   editText.setText(default)
                 }
             }
             override fun afterTextChanged(s: Editable) {
@@ -60,15 +51,31 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun changeCommaByPoint(editText: EditText) {
         if (editText.text.toString().contains(",")) {
             editText.setText(editText.text.toString().replace(",", "."))
         }
     }
+
+    // CHECKS
+    private fun checkIfPointStart() {
+        val bill = txtBill.text.toString()
+        val percentage = txtPercentage.text.toString()
+        val diner = txtDiners.text.toString()
+
+        if (bill.startsWith(getString(R.string.point))) {
+            txtBill.setText(R.string.defaultMoney)
+        }
+        if (percentage.startsWith(getString(R.string.point))) {
+            txtPercentage.setText(R.string.defaultTipPer)
+        }
+        if (diner.startsWith(getString(R.string.point))) {
+            txtDiners.setText(R.string.defaultDinners)
+        }
+    }
     private fun checkValuesText() {
         val bill = txtBill.text.toString()
-        val percentage = txtTipPer.text.toString()
+        val percentage = txtPercentage.text.toString()
         val diner = txtDiners.text.toString()
 
         if (bill.isNotEmpty() && percentage.isNotEmpty() && diner.isNotEmpty()) {
@@ -82,66 +89,57 @@ class MainActivity : AppCompatActivity() {
             }
 
             if (percentage.toFloat() < 0.00f) {
-                txtTipPer.setText(getString(R.string.defaultTipPer))
+                txtPercentage.setText(getString(R.string.defaultTipPer))
             } else if (percentage.toFloat() > 100.00f) {
-                txtTipPer.setText(getString(R.string.defaultMaxTipPer))
+                txtPercentage.setText(getString(R.string.defaultMaxTipPer))
             }
 
-            tipCalculator = TipCalculator(txtBill.text.toString().toFloat(), txtTipPer.text.toString().toFloat(), txtDiners.text.toString().toInt())
+            tipCalculator = TipCalculator(txtBill.text.toString().toFloat(), txtPercentage.text.toString().toFloat(), txtDiners.text.toString().toInt())
         }
     }
+
+    // CHANGE VALUES
     private fun changeValuesResult() {
-        txtTip.setText(String.format("%.2f", tipCalculator?.calculateTip()))
-        txtTotalBill.setText(String.format("%.2f", tipCalculator?.calculateTotal()))
-        txtPerDinner.setText(String.format("%.2f",tipCalculator?.calculatePerDiner()))
-        txtRounded.setText(String.format("%.2f", tipCalculator?.calculatePerDinerRounded()))
+        txtTip.setText(String.format(getString(R.string.numberFormat), tipCalculator?.calculateTip()))
+        txtTotal.setText(String.format(getString(R.string.numberFormat), tipCalculator?.calculateTotal()))
+        txtPerDiner.setText(String.format(getString(R.string.numberFormat),tipCalculator?.calculatePerDiner()))
+        txtPerDinerRounded.setText(String.format(getString(R.string.numberFormat), tipCalculator?.calculatePerDinerRounded()))
 
         changeCommaByPoint(txtTip)
-        changeCommaByPoint(txtTotalBill)
-        changeCommaByPoint(txtPerDinner)
-        changeCommaByPoint(txtRounded)
-    }
-
-    private fun checkIfPointStart() {
-        val bill = txtBill.text.toString()
-        val percentage = txtTipPer.text.toString()
-        val diner = txtDiners.text.toString()
-
-        if (bill.startsWith(".")) {
-            txtBill.setText(R.string.defaultMoney)
-        }
-        if (percentage.startsWith(".")) {
-            txtTipPer.setText(R.string.defaultTipPer)
-        }
-        if (diner.startsWith(".")) {
-            txtDiners.setText(R.string.defaultDinners)
-        }
+        changeCommaByPoint(txtTotal)
+        changeCommaByPoint(txtPerDiner)
+        changeCommaByPoint(txtPerDinerRounded)
     }
 
     // BOTONES DE RESET
-    private fun resetBtnBillTip() {
-        val btnReset = ActivityCompat.requireViewById<Button>(this, R.id.btnResetBill)
-        btnReset.setOnClickListener { r -> resetBillTip()}
+    private fun btnResetTip() {
+        val btnReset = ActivityCompat.requireViewById<Button>(this, R.id.btnResetTip)
+        btnReset.setOnClickListener {resetBillTip()}
     }
-    private fun resetBtnAll() {
-        val btnReset = ActivityCompat.requireViewById<Button>(this, R.id.btnResetAll)
-        btnReset.setOnClickListener {r -> resetAll()}
+    private fun btnResetDiners() {
+        val btnReset = ActivityCompat.requireViewById<Button>(this, R.id.btnResetDiners)
+        btnReset.setOnClickListener {resetDiner()}
     }
 
-    private fun resetAll() {
+    private fun resetDiner() {
         val defDinner = getString(R.string.defaultDinners)
         val defMoney = getString(R.string.defaultMoney)
-        resetBillTip()
+
+        txtDiners.requestFocus()
+
         txtDiners.setText(defDinner)
-        txtPerDinner.setText(defMoney)
-        txtRounded.setText(defMoney)
+        txtPerDiner.setText(defMoney)
+        txtPerDinerRounded.setText(defMoney)
     }
     private fun resetBillTip() {
         val defMoney = getString(R.string.defaultMoney)
         val defTip = getString(R.string.defaultTipPer)
+
+        txtBill.requestFocus()
+
         txtBill.setText(defMoney)
-        txtTipPer.setText(defTip)
+        txtPercentage.setText(defTip)
         txtTip.setText(defMoney)
-        txtTotalBill.setText(defMoney)
+        txtTotal.setText(defMoney)
     }
 }

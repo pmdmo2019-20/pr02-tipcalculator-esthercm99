@@ -1,5 +1,6 @@
 package es.iessaladillo.pedrojoya.tipcalculator.model
 
+import kotlin.math.ceil
 import kotlin.math.round
 
 // TipCalculator class. Its constructor receives bill, percentage and diners
@@ -28,6 +29,6 @@ class TipCalculator(
     }
 
     fun calculatePerDinerRounded(): Float {
-        return round(calculatePerDiner())
+        return ceil(calculatePerDiner())
     }
 }
